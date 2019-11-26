@@ -20,6 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   flare_flutter: ^1.5.15
+  flushbar: ^1.9.0
+  line_icons: ^0.2.0
+
 
 
 dev_dependencies:

@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'game.dart';
 
@@ -47,6 +48,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String message = 'Hmm..Let\'s Play a Game';
 
   void _incrementCounter() {
     setState(() {
@@ -56,8 +58,24 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      if(_counter > 5){
+        message = "One last message...";
+      }
     });
   }
+
+  Widget showFunMessage(BuildContext context) {
+  return Flushbar(
+    title: "Thank you!",
+    message:"Everyone for listening and Happy long Weekend!",
+    duration: Duration(seconds: 6),
+    icon: Icon(
+        Icons.favorite,
+        color: Colors.pinkAccent,
+      ),
+    backgroundColor: Colors.teal,
+  )..show(context);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.display1,
                   )
                 : GestureDetector(
-                    onTap: () => Navigator.push(
+                    onTap: () => _counter <8 ?Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => Game(),
-                        )),
+                        )) : showFunMessage(context),
                     child: Container(
                       width: 250.0,
                       padding: EdgeInsets.all(10.0),
@@ -106,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       child: Center(
                         child: Text(
-                          'Hmm..Let\'s Play a Game',
+                          message,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20.0,
